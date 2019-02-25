@@ -1,0 +1,30 @@
+name: GraphQL Fields to MongoDB Selections
+description: Convert GraphQL fields to MongoDB selections
+# this service is compatible with the following services:
+# - https://github.com/ilgooz/service-graphql
+# - https://github.com/ilgooz/service-mongo
+sid: graphql-fields-to-mongo-selections
+tasks:
+  convert:
+    description: Convert GraphQL fields to MongoDB selections
+    inputs:
+      fields:
+        description: "GraphQL fields. e.g.: '[ { name: 'a', fields: [ { name: 'b' } ] }, { name: 'c' } ]'"
+        type: Object
+        repeated: true
+        object:
+          name:
+            type: String
+          fields:
+            type: Any
+            optional: true
+    outputs:
+      success:
+        data:
+          data:
+            description: "MongoDB selection format. e.g.: '{ a: { b: 1 }, c: 2 }'"
+            type: Object
+      failure:
+        data:
+          message:
+            type: String
